@@ -1,0 +1,67 @@
+﻿Contracts ->
+
+//POST api/face request
+{ "Face": "XXXXXXXXXXXX" //base64 string,
+ "RequesterId": 1111 }
+
+
+//GET api/face & api/user response &
+api/foodRestrictions &
+api/users/foodRestrictions
+{ "Processing": true , "UserId": 1111 }
+
+
+//api/foodRestrictions &
+api/users/foodRestrictions
+{ "Restrictions": ["soy","gluten"],
+ "Others": "brocolis",
+ "UserId": 1111,
+ "RequesterId": 1111 }
+
+
+//NewOrder message
+{ "OrderId": 1111,
+ "StoreId": 1111,
+ "Total": "10.20",
+ "Products": [{ "ProductId": 1111}]
+ "ProductionIds": [1111,1112] }
+
+
+UICommand -> 
+
+UICommand:\nShowProductsList
+[{ "StoreId": 1111,
+ "ProductId": "XXXX",
+ "Name": "Darth Bacon",
+ "Image": "img1.png",
+ "Items": [{ "ItemId": 1111, "Name": "bread"
+},
+ { "ItemId": 1112, "Name": "meat" }
+ ], "Price": 4,
+ "RequesterId": 1111 }]
+
+//UICommand:ShowFoodRestrictionsForm
+{ "UserId": 1111, "RequesterId": 1111 }
+
+???
+//UICommand:ShowFoodRestrictionsForm
+{ "UserId": 1111, "RequesterId": 1111 }
+
+
+
+
+Encaminhar ->
+
+//POST api/order request
+{ "OrderId": 1111,
+ "StoreId": 1111,
+ "Products": [{ "ProductId": 1111, "Price":
+"10.20" }]
+ "ProductionIds": [1111,1112] }
+
+
+//POST api/order response
+{ "OrderId": 1111,
+ "StoreId": 1111,
+ "Total": "10.20" }
+
