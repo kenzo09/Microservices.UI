@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.UI", "Microservices.UI\Microservices.UI.csproj", "{6CB7668E-28F8-4F8D-A88D-E32A7F471CBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.UI", "Microservices.UI\Microservices.UI.csproj", "{6CB7668E-28F8-4F8D-A88D-E32A7F471CBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.UI.Contracts", "Microservices.UI.Contracts\Microservices.UI.Contracts.csproj", "{B4834F4B-BE74-42BC-83ED-6AD74FBB2AFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.UI.Contracts", "Microservices.UI.Contracts\Microservices.UI.Contracts.csproj", "{B4834F4B-BE74-42BC-83ED-6AD74FBB2AFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.UI.Moc", "Microservices.UI.Moc\Microservices.UI.Moc.csproj", "{9B702773-E29E-4472-94F4-2BF0E084463B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B4834F4B-BE74-42BC-83ED-6AD74FBB2AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4834F4B-BE74-42BC-83ED-6AD74FBB2AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4834F4B-BE74-42BC-83ED-6AD74FBB2AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B702773-E29E-4472-94F4-2BF0E084463B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B702773-E29E-4472-94F4-2BF0E084463B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B702773-E29E-4472-94F4-2BF0E084463B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B702773-E29E-4472-94F4-2BF0E084463B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
