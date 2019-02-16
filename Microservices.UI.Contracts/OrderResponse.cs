@@ -6,9 +6,9 @@ namespace Microservices.UI.Contracts
 {
     public class OrderResponse
     {
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
 
-        public int StoreId { get; set; }
+        public Guid StoreId { get; set; }
 
         public decimal Total { get; set; }
     }

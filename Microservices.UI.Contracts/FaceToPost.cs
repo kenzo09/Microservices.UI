@@ -7,7 +7,7 @@ namespace Microservices.UI.Contracts
     public class FaceToPost
     {
         public string Face { get; set; }
-        public int RequestId { get; set; }
+        public Guid RequestId { get; set; }
 
     }
 }

@@ -6,13 +6,13 @@ namespace Microservices.UI.Contracts
 {
     public class OrderRequest
     {
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
 
-        public int StoreId { get; set; }
+        public Guid StoreId { get; set; }
 
         public Product Products { get; set; }
 
-        public int[] ProductionsIds { get; set; }
+        public Guid[] ProductionsIds { get; set; }
 
     }
 }
