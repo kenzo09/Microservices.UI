@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace Microservices.UI.Moc.Contratos
 {
-    public class UserToResponse
+    public class UserToPostMoc
     {
-        public bool Processing { get; set; } = true;
+        public string Face { get; set; }
 
-        public Guid UserId { get; set; } = Guid.NewGuid();
     }
 }

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Microservices.UI.Moc.Contratos
 {
-    public class ProductsToRequest
+    public class StoreCatalogProductsToRequestMoc
     {
-        public string StoreName { get; set; }
 
     }
 }

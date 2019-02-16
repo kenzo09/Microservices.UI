@@ -13,9 +13,9 @@ namespace Microservices.UI.Moc.Controllers
     {
         [HttpPost]
         [Route("api/User")]
-        public IActionResult Index(UserToPost userToPost)
+        public IActionResult Index(UserToPostMoc userToPost)
         {
-            return Ok(new UserToResponse());
+            return Ok(new UserToResponseMoc());
         }
 
 
