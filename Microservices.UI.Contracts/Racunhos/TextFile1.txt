@@ -16,7 +16,8 @@ api/users/foodRestrictions
 { "Restrictions": ["soy","gluten"],
  "Others": "brocolis",
  "UserId": 1111,
- "RequesterId": 1111 }
+ "RequesterId": 1111 }
+
 
 
 //NewOrder message
