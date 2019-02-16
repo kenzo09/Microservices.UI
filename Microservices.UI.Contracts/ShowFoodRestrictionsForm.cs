@@ -6,8 +6,8 @@ namespace Microservices.UI.Contracts
 {
     public class ShowFoodRestrictionsForm
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
-        public int RequesterId { get; set; }
+        public Guid RequesterId { get; set; }
     }
 }

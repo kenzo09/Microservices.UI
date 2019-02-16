@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Microservices.UI.Contracts
 {
-    public class FaceToPost
+    public class ProductItem
     {
-        public string Face { get; set; }
-        public Guid RequestId { get; set; }
+        public Guid ItemId { get; set; }
 
+        public string Name { get; set; }
     }
 }
