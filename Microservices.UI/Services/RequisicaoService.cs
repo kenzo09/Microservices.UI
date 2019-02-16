@@ -21,13 +21,9 @@ namespace Microservices.UI.Services
             return await httpClient.PostAsync($"{baseUrl}/api/{api}", content);
         }
 
-        public async Task<HttpResponseMessage> GetAsync(dynamic data, Uri uri, string api, string parametros)
+        public async Task<HttpResponseMessage> GetAsync(Uri uri, string api, string parametros)
         {
             var httpClient = new HttpClient();
-            var byteData = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data));
-            var content = new ByteArrayContent(byteData);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
             var baseUrl = uri.Scheme + Uri.SchemeDelimiter + uri.Host + ":" + uri.Port;
 
             return await httpClient.GetAsync($"{baseUrl}/api/{api}{parametros}");

@@ -9,6 +9,6 @@ namespace Microservices.UI.Services
     public interface IRequisicaoService
     {
         Task<HttpResponseMessage> PostAsync(dynamic data, Uri uri, string api);
-        Task<HttpResponseMessage> GetAsync(dynamic data, Uri uri, string api, string parametros);
+        Task<HttpResponseMessage> GetAsync(Uri uri, string api, string parametros);
     }
 }

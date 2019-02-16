@@ -36,6 +36,7 @@ namespace Microservices.UI
             }
 
             app.UseMvc();
+            app.ApplicationServices.GetService<IReceiveMessagesFactory>();
         }
     }
 }
