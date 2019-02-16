@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Microservices.UI.Moc.Contratos
 {
-    public class FoodRestrictions
+    public class FoodRestrictionsMoc
     {
         public List<string> Restrictions { get; set; }
 

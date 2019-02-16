@@ -29,7 +29,7 @@ namespace Microservices.UI.Controllers
         [Route("api/Face")]
         public IActionResult Index(FaceToPost face)
         {
-            var response = _requisicaoService.PostAsync(new UserToPost(), Request.GetUri(), "User");
+            var response = _requisicaoService.PostAsync(new UserToPostMoc(), Request.GetUri(), "UserMoc");
 
             return Ok(new FaceToProcessing());
         }

@@ -5,19 +5,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microservices.UI.Moc.Contratos;
-
+using Microservices.UI.Contracts;
 
 namespace Microservices.UI.Moc.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/UserFoodRestrictionsMoc")]
+    [Produces("application/json")]    
     public class UserFoodRestrictionsMocController : Controller
     {
         [HttpPost]
-        [Route("api/User")]
+        [Route("api/Users/foodRestricions")]
         public IActionResult Index(FoodRestrictions foodRestrictions)
         {
-            return Ok(new UserFoodRestrictions());
+            return Ok(new UserFoodRestrictionsMoc());
         }
     }
 }
