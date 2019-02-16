@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace Microservices.UI
+namespace Microservices.UI.Moc
 {
     public class Startup
     {
@@ -22,8 +24,6 @@ namespace Microservices.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IReceiveMessagesFactory, ReceiveMessagesFactory>();
-            services.AddSingleton<IRequisicaoService, RequisicaoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

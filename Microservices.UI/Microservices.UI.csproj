@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Microservices.UI.Contracts\Microservices.UI.Contracts.csproj" />
+    <ProjectReference Include="..\Microservices.UI.Moc\Microservices.UI.Moc.csproj" />
   </ItemGroup>
 
 </Project>
