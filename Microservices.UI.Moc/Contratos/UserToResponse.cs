@@ -9,6 +9,6 @@ namespace Microservices.UI.Moc.Contratos
     {
         public bool Processing { get; set; } = true;
 
-        public Guid UserId { get; set; } = new Guid();
+        public Guid UserId { get; set; } = Guid.NewGuid();
     }
 }

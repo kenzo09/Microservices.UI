@@ -6,7 +6,7 @@ namespace Microservices.UI.Contracts
 {
     public class FaceToProcessing
     {
-        public bool Processing { get; set; }
-        public Guid UserId { get; set; }
+        public bool Processing { get; set; } = true;
+        public Guid UserId { get; set; } = Guid.NewGuid();
     }
 }

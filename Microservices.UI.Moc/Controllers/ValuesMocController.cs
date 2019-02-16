@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Microservices.UI.Moc.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class ValuesMocController : Controller
     {
         // GET api/values
         [HttpGet]

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Microservices.UI.Moc.Controllers
 {
     [Produces("application/json")]
-    public class UserController : Controller
+    public class UserMocController : Controller
     {
         [HttpPost]
         [Route("api/User")]
