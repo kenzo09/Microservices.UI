@@ -13,7 +13,7 @@ namespace Microservices.UI.Contracts
 
         public Product Products { get; set; }
 
-        public Guid[] ProductionIds { get; set; }
+        public List<Guid> ProductionIds { get; set; }
 
     }
 }
