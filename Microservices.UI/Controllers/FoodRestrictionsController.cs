@@ -25,7 +25,7 @@ namespace Microservices.UI.Controllers
         public IActionResult Index(FoodRestrictions foodRestrictions)
         {
 
-            var response = _requisicaoService.PostAsync(foodRestrictions, Request.GetUri(), "Users/foodRestricions");
+            var response = _requisicaoService.PostAsync(foodRestrictions, Request.GetUri(), "Users/foodRestricionsMoc");
 
             return Ok();
         }
