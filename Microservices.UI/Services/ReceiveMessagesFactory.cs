@@ -23,7 +23,7 @@ namespace Microservices.UI.Services
 
             var url = config.GetValue(typeof(string), "StoreCatalogUri").ToString();
             Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri);
-            _requisicaoService.GetAsync(uri, "store", $"?StoreId={Guid.NewGuid()}&Ready=true");
+            _requisicaoService.GetAsync(uri, "storeMoc", $"?StoreId={Guid.NewGuid()}&Ready=true");
         }
 
         public ReceiveMessagesService CreateNew(string topic, string subscription, string filterName = null, string filter = null)
