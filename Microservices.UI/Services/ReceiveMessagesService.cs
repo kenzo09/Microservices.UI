@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.ServiceBus;
+﻿using GeekBurger.StoreCatalog.Contract.Model;
+using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
@@ -16,8 +17,9 @@ namespace Microservices.UI.Services
         private readonly string _topicName;
         private static ServiceBusConfiguration _serviceBusConfiguration;
         private readonly string _subscriptionName;
+        private readonly IUICommandService _uiCommandService;
 
-        public ReceiveMessagesService(string topic, string subscription, string filterName = null, string filter = null)
+        public ReceiveMessagesService(IUICommandService uiCommandService, string topic, string subscription, string filterName = null, string filter = null)
         {
             IConfiguration configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -25,6 +27,7 @@ namespace Microservices.UI.Services
                 .Build();
 
             _serviceBusConfiguration = configuration.GetSection("serviceBus").Get<ServiceBusConfiguration>();
+            _uiCommandService = uiCommandService;
 
             _topicName = topic;
             _subscriptionName = subscription;
@@ -54,18 +57,23 @@ namespace Microservices.UI.Services
             var mo = new MessageHandlerOptions(ExceptionHandle) { AutoComplete = true };
 
             subscriptionClient.RegisterMessageHandler(Handle, mo);
-
-            Console.ReadLine();
         }
 
-        private static Task Handle(Message message, CancellationToken arg2)
+        private Task Handle(Message message, CancellationToken arg2)
         {
-            Console.WriteLine($"message Label: {message.Label}");
-            Console.WriteLine($"message CorrelationId: {message.CorrelationId}");
-            var productChangesString = Encoding.UTF8.GetString(message.Body);
+            var messageString = "";
+            if (message.Body != null)
+                messageString = Encoding.UTF8.GetString(message.Body);
+
+            List<StoreCatalogReady> storeCatalog = null;
+            if (message.Label.ToLowerInvariant() == nameof(StoreCatalogReady).ToLowerInvariant())
+                storeCatalog = JsonConvert.DeserializeObject<List<StoreCatalogReady>>(messageString);
 
             Console.WriteLine("Message Received");
-            Console.WriteLine(productChangesString);
+            Console.WriteLine($"message Label: {message.Label}");
+            Console.WriteLine($"message CorrelationId: {message.CorrelationId}");
+
+            _uiCommandService.AddToMessageList(storeCatalog);
 
             return Task.CompletedTask;
         }

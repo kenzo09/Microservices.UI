@@ -8,11 +8,13 @@ namespace Microservices.UI.Services
     public class ReceiveMessagesFactory : IReceiveMessagesFactory
     {
         private readonly IRequisicaoService _requisicaoService;
+        private readonly IUICommandService _uiCommandService;
         private const string Subscription = "ui";
 
-        public ReceiveMessagesFactory(IRequisicaoService requisicaoService)
+        public ReceiveMessagesFactory(IRequisicaoService requisicaoService, IUICommandService uiCommandService)
         {
             _requisicaoService = requisicaoService;
+            _uiCommandService = uiCommandService;
             CreateNew("StoreCatalogReady", Subscription);
             CreateNew("UserRetrieved", Subscription);
 
@@ -28,7 +30,7 @@ namespace Microservices.UI.Services
 
         public ReceiveMessagesService CreateNew(string topic, string subscription, string filterName = null, string filter = null)
         {
-            return new ReceiveMessagesService(topic, subscription, filterName, filter);
+            return new ReceiveMessagesService(_uiCommandService, topic, subscription, filterName, filter);
         }
     }
 }
