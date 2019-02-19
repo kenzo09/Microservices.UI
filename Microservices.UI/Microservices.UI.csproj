@@ -9,7 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GeekBurger.StoreCatalog.Contract" Version="1.0.4" />
+    <PackageReference Include="GeekBurger.Orders.Contract" Version="2.0.1" />
+    <PackageReference Include="GeekBurger.Products.Contract" Version="3.0.0" />
+    <PackageReference Include="GeekBurger.StoreCatalog.Contract" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.Azure.Management.ServiceBus" Version="2.0.1" />
     <PackageReference Include="Microsoft.Azure.Management.ServiceBus.Fluent" Version="1.19.0" />
