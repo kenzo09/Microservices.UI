@@ -15,7 +15,7 @@ namespace Microservices.UI.Services
         {
             _requisicaoService = requisicaoService;
             _uiCommandService = uiCommandService;
-            CreateNew("StoreCatalogReady", Subscription);
+            CreateNew("StoreCatalogReadyMessage", Subscription);
             CreateNew("UserRetrieved", Subscription);
 
             var config = new ConfigurationBuilder()
