@@ -55,7 +55,7 @@ namespace Microservices.UI.Services
 
             subscriptionClient.RegisterMessageHandler(Handle, mo);
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         private static Task Handle(Message message, CancellationToken arg2)

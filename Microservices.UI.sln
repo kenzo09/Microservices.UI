@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.UI", "Microse
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.UI.Contracts", "Microservices.UI.Contracts\Microservices.UI.Contracts.csproj", "{B4834F4B-BE74-42BC-83ED-6AD74FBB2AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.UI.Moc", "Microservices.UI.Moc\Microservices.UI.Moc.csproj", "{9B702773-E29E-4472-94F4-2BF0E084463B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.UI.Moc", "Microservices.UI.Moc\Microservices.UI.Moc.csproj", "{9B702773-E29E-4472-94F4-2BF0E084463B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekBurger-HTML", "..\..\..\Downloads\GeekBurger-Html-master\GeekBurger-HTML\GeekBurger-HTML.csproj", "{2FB53454-C2E4-4119-9BD4-1D65E079EC15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{9B702773-E29E-4472-94F4-2BF0E084463B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B702773-E29E-4472-94F4-2BF0E084463B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B702773-E29E-4472-94F4-2BF0E084463B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB53454-C2E4-4119-9BD4-1D65E079EC15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB53454-C2E4-4119-9BD4-1D65E079EC15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB53454-C2E4-4119-9BD4-1D65E079EC15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB53454-C2E4-4119-9BD4-1D65E079EC15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

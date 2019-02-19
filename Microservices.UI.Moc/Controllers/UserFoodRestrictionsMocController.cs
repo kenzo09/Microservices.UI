@@ -13,7 +13,7 @@ namespace Microservices.UI.Moc.Controllers
     public class UserFoodRestrictionsMocController : Controller
     {
         [HttpPost]
-        [Route("api/Users/foodRestricions")]
+        [Route("api/Users/foodRestricionsMoc")]
         public IActionResult Index(FoodRestrictions foodRestrictions)
         {
             return Ok(new UserFoodRestrictionsMoc());
