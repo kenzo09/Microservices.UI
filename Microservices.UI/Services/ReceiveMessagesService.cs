@@ -1,4 +1,4 @@
-﻿using GeekBurger.StoreCatalog.Contract.Model;
+﻿//using GeekBurger.StoreCatalog.Contract.Model;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

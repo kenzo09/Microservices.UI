@@ -1,0 +1,134 @@
+﻿@{
+    ViewData["Title"] = "Welcome to Geek Burger";
+}
+
+@Html.Hidden("FoodRestrictionsApi", (object)ViewBag.FoodRestrictionsApi)
+@Html.Hidden("OrderApi", (object)ViewBag.OrderApi)
+@Html.Hidden("OrderPayApi", (object)ViewBag.OrderPayApi)
+@Html.Hidden("RequesterId", (object)ViewBag.RequesterId)
+
+<div id="step1" class="steps">
+    <h1>Welcome to Geek Burger!</h1>
+    <h2>Let's take a snapshot so we can recognize you</h2>
+    <h3>Click on Start WebCam and centralize your face on the camera</h3>
+    <p>
+        <button id="startWebCam">Start WebCam</button>
+    </p>
+</div>
+<div id="step2" class="steps">
+    <h3>Click on Take Snapshot and Your face login will be submitted!</h3>
+    <video width="400" id="video" autoplay="true"></video>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <br />
+    <button id="takeSnapshot">Take Snapshot</button>
+</div>
+<div id="waiting-step2" class="steps">
+    <h3>Your face is being submitted, please wait...</h3>
+</div>
+<div id="waiting-step3" class="steps">
+    <h3>Your face is being verified, please wait...</h3>
+</div>
+<div id="step-3" class="steps">
+    <form id="formStep3">
+        <h3>Do you have any food restriction? Please select from the list below and submit</h3>
+        <div>
+            <div>
+                <input type="checkbox" name="Restrictions" value="gluten" />Gluten
+            </div>
+            <div>
+                <input type="checkbox" name="Restrictions" value="diary" />Milk
+            </div>
+            <div>
+                <input type="checkbox" name="Restrictions" value="peanut" />Peanuts
+            </div>
+            <div>
+                <input type="checkbox" name="Restrictions" value="soy" />Soy
+            </div>
+            <div>
+                <input type="checkbox" name="Restrictions" value="sugar" />Sugar
+            </div>
+            <div>
+                <input type="checkbox" name="Restrictions" value="wheat" />Wheat
+            </div>
+        </div>
+        <div>If you have any other restriction, inform here separated by comma</div>
+        <div>
+            <input type="text" name="Others" />
+        </div>
+        <div>
+            <input type="submit" name="Submit" id="submitFoodRestrictions" />
+        </div>
+    </form>
+</div>
+<div id="waiting-step4" class="steps">
+    <h3>Waiting product catalog...</h3>
+</div>
+<div id="step-4" class="steps">
+
+    <div class="cart-box">
+
+        Items in Cart: <input type="text" readonly="readonly" id="quantity" />
+        <br />
+        <button id="checkout" class="btn btn-primary">checkout</button>
+    </div>
+
+    <script type="text/html" id="product_tmpl">
+        <div class="product">
+            <div class="img-container">
+                <img src="images/<%=image%>" id="image" />
+            </div>
+            <h3><%=name%></h3>
+            <h3>Price: <%=priceFormat%></h3>
+            <div>
+                <button productIndex="<%=index%>" class="add-cart">add to cart</button>
+            </div>
+        </div>
+    </script>
+
+    <div id="products-list"></div>
+
+
+</div>
+
+<div id="step-5" class="steps">
+    Order Id: <label class="orderId"></label>
+    <script type="text/html" id="summary_prod_tmpl">
+        <h3><%=name%> - <%=priceFormat%></h3>
+    </script>
+    <div class="prod-summary"></div>
+    <h2>total: <label class="total"></label></h2>
+    <div>Please insert your credit card and wait for payment confirmation...</div>
+</div>
+
+<div id="waiting-step6" class="steps">
+    <h3>Waiting payment confirmation...</h3>
+</div>
+
+<div id="step-6" class="steps">
+    <h2>Payment Confirmed!</h2>
+    <h3>
+        Your order number is <label class="orderId"></label>!
+        <br />
+        A QR code is being printed.
+        <br />
+        Please put this QR code on a visible area of your desk.
+        <br />
+        That's how crew will be able to deliver the order to you.
+    </h3>
+</div>
+
+<div class="debug-window">
+    
+    <div>Send message to simulate external interaction</div>
+    <div><select id="message">
+            <option>uicommand|showwelcomepage</option>            
+            <option>uicommand|showfoodrestrictionsform</option>
+            <option>uicommand|showproductslist|products.json</option>
+            <option>orderpaid|8048e9ec-80fe-4bad-bc2a-e4f4a75c834e</option>
+        </select>
+</div>
+    <div>
+    <button id="send-message">send message</button>
+    </div>
+    <div id="result"></div>
+</div>

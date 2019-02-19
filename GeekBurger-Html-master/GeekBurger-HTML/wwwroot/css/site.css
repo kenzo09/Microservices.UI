@@ -1,0 +1,76 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.product img {
+    width: 300px;    
+}
+
+.img-container {
+    height: 260px;
+}
+
+.product {
+    min-width: 350px;
+    min-height: 440px;
+    float: left;
+}
+
+.cart-box {
+    position: absolute;
+    top: 70px;
+    right: 10px;
+    width: 110px;
+    height: 100px;
+}
+
+.cart-box input {
+    border: none;
+    width: 20px;
+}
+
+#products-list{ display: table;float: none;}
+
+.debug-window {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    background-color: #00f1f1;
+    margin: 10px;
+    padding: 10px;
+}
+.debug-window div {
+    padding: 5px;
+}

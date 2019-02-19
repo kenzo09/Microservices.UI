@@ -1,0 +1,3 @@
+uicommand|showfoodrestrictionsform
+uicommand|showproductslist|products.json
+orderpaid|8048e9ec-80fe-4bad-bc2a-e4f4a75c834e
