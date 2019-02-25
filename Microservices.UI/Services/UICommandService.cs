@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GeekBurger.StoreCatalog.Contract;
+using GeekBurger.StoreCatalog.Contract.Model;
 using Microsoft.Azure.Management.ServiceBus.Fluent;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
@@ -39,12 +40,12 @@ namespace Microservices.UI.Services
 
         }
 
-        public void AddToMessageList(IEnumerable<StoreCatalogReadyMessage> storeCatalogs)
+        public void AddToMessageList(IEnumerable<StoreCatalogReady> storeCatalogs)
         {
             _messages.AddRange(storeCatalogs.Select(GetMessage).ToList());
         }
 
-        public Message GetMessage(StoreCatalogReadyMessage storeCatalog)
+        public Message GetMessage(StoreCatalogReady storeCatalog)
         {
             var storeCatalogSerialized = JsonConvert.SerializeObject(storeCatalog);
             var storeCatalogByteArray = Encoding.UTF8.GetBytes(storeCatalogSerialized);

@@ -1,4 +1,5 @@
 ﻿using GeekBurger.StoreCatalog.Contract;
+using GeekBurger.StoreCatalog.Contract.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Microservices.UI.Services
     public interface IUICommandService
     {
         void SendMessagesAsync();
-        void AddToMessageList(IEnumerable<StoreCatalogReadyMessage> storeCatalogs);
+        void AddToMessageList(IEnumerable<StoreCatalogReady> storeCatalogs);
     }
 }
