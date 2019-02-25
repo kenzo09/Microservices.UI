@@ -1,4 +1,4 @@
-﻿namespace Microservices.UI.Services
+﻿namespace Microservices.UI.Services.Interfaces
 {
     public interface IReceiveMessagesFactory
     {
