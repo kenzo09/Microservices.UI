@@ -1,4 +1,5 @@
 ﻿using GeekBurger.StoreCatalog.Contract;
+using Microservices.UI.Services.Interfaces;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;

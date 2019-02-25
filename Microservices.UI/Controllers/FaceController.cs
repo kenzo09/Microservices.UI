@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microservices.UI.Contracts;
 using Microservices.UI.Moc.Contratos;
 using Microservices.UI.Services;
+using Microservices.UI.Services.Interfaces;
 using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

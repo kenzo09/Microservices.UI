@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Microservices.UI.Services
+namespace Microservices.UI.Services.Interfaces
 {
     public interface IUICommandService
     {

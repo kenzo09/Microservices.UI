@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GeekBurger.StoreCatalog.Contract;
+using Microservices.UI.Services.Extensions;
+using Microservices.UI.Services.Interfaces;
 using Microsoft.Azure.Management.ServiceBus.Fluent;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;

@@ -2,7 +2,7 @@
 using Microsoft.Azure.Management.ServiceBus.Fluent;
 using Microsoft.Extensions.Configuration;
 
-namespace Microservices.UI.Services
+namespace Microservices.UI.Services.Extensions
 {
     public static class ServiceBusNamespaceExtension
     {

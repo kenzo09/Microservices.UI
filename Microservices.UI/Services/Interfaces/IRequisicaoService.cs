@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Microservices.UI.Services
+namespace Microservices.UI.Services.Interfaces
 {
     public interface IRequisicaoService
     {
