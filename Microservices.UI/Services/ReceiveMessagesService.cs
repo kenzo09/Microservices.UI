@@ -1,5 +1,4 @@
 ﻿using GeekBurger.StoreCatalog.Contract;
-using GeekBurger.StoreCatalog.Contract.Model;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -66,10 +65,10 @@ namespace Microservices.UI.Services
             if (message.Body != null)
                 messageString = Encoding.UTF8.GetString(message.Body);
 
-            List<StoreCatalogReady> storeCatalog = null;
+            List<StoreCatalogReadyMessage> storeCatalog = null;
 
-            if (message.Label.ToLowerInvariant() == nameof(StoreCatalogReady).ToLowerInvariant())
-                storeCatalog = JsonConvert.DeserializeObject<List<StoreCatalogReady>>(messageString);
+            if (message.Label.ToLowerInvariant() == nameof(StoreCatalogReadyMessage).ToLowerInvariant())
+                storeCatalog = JsonConvert.DeserializeObject<List<StoreCatalogReadyMessage>>(messageString);
 
             Console.WriteLine("Message Received");
             Console.WriteLine($"message Label: {message.Label}");
