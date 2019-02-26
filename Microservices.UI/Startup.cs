@@ -41,6 +41,7 @@ namespace Microservices.UI
 
             services.AddSingleton<IReceiveMessagesFactory, ReceiveMessagesFactory>();
             services.AddSingleton<IUICommandService, UICommandService>();
+            services.AddSingleton<INewOrderService, NewOrderService>();
             services.AddSingleton<IRequisicaoService, RequisicaoService>();
         }
 
