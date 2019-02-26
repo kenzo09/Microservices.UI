@@ -10,28 +10,26 @@ namespace Microservices.UI.Services
     {
         private readonly IRequisicaoService _requisicaoService;
         private readonly IUICommandService _uiCommandService;
+        private readonly IConfigurationService _configurationService;
         private const string Subscription = "ui";
 
-        public ReceiveMessagesFactory(IRequisicaoService requisicaoService, IUICommandService uiCommandService)
+        public ReceiveMessagesFactory(IRequisicaoService requisicaoService, IUICommandService uiCommandService,
+            IConfigurationService configurationService)
         {
             _requisicaoService = requisicaoService;
             _uiCommandService = uiCommandService;
+            _configurationService = configurationService;
             CreateNew("StoreCatalogReadyMessage", Subscription);
             CreateNew("UserRetrieved", Subscription);
-
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            var url = config.GetValue(typeof(string), "StoreCatalogUri").ToString();
+            
+            var url = _configurationService.GetConfigValue(typeof(string), "StoreCatalogUri").ToString();
             Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri);
             _requisicaoService.GetAsync(uri, "storeMoc", $"?StoreId={Guid.NewGuid()}&Ready=true");
         }
 
         public ReceiveMessagesService CreateNew(string topic, string subscription, string filterName = null, string filter = null)
         {
-            return new ReceiveMessagesService(_uiCommandService, _requisicaoService, topic, subscription, filterName, filter);
+            return new ReceiveMessagesService(_uiCommandService, _requisicaoService, _configurationService, topic, subscription, filterName, filter);
         }
     }
 }

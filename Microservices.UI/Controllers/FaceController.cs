@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Microservices.UI.Contracts;
+﻿using Microservices.UI.Contracts;
 using Microservices.UI.Moc.Contratos;
-using Microservices.UI.Services;
 using Microservices.UI.Services.Interfaces;
-using Microsoft.ApplicationInsights.AspNetCore.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using System;
 
 namespace Microservices.UI.Controllers
 {
@@ -20,9 +10,11 @@ namespace Microservices.UI.Controllers
     public class FaceController : Controller
     {
         private readonly IRequisicaoService _requisicaoService;
+        private readonly IConfigurationService _configurationService;
 
-        public FaceController(IRequisicaoService requisicao)
+        public FaceController(IRequisicaoService requisicao, IConfigurationService configurationService)
         {
+            _configurationService = configurationService;
             _requisicaoService = requisicao;
         }
 
@@ -30,7 +22,12 @@ namespace Microservices.UI.Controllers
         [Route("api/Face")]
         public IActionResult Index(FaceToPost face)
         {
-            var response = _requisicaoService.PostAsync(new UserToPostMoc(), Request.GetUri(), "UserMoc");
+            var url = _configurationService.GetConfigValue(typeof(string), "UsersUri").ToString();
+            Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri);
+            bool usarMoc = Convert.ToBoolean(_configurationService.GetConfigValue(typeof(bool), "UsarMoc"));
+
+            string api = usarMoc ? "UserMoc" : "User";
+            var response = _requisicaoService.PostAsync(new UserToPostMoc(), uri, api);
 
             return Ok(new FaceToProcessing());
         }

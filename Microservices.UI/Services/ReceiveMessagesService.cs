@@ -22,15 +22,18 @@ namespace Microservices.UI.Services
         private readonly IUICommandService _uiCommandService;
         private readonly IRequisicaoService _requisicaoService;
         private readonly IConfiguration _configuration;
+        private readonly IConfigurationService _configurationService;
 
         public ReceiveMessagesService(IUICommandService uiCommandService, IRequisicaoService requisicaoService,
-            string topic, string subscription, string filterName = null, string filter = null)
+            IConfigurationService configurationService, string topic, string subscription, 
+            string filterName = null, string filter = null)
         {
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
+            _configurationService = configurationService;
             _serviceBusConfiguration = _configuration.GetSection("serviceBus").Get<ServiceBusConfiguration>();
             _uiCommandService = uiCommandService;
             _requisicaoService = requisicaoService;
@@ -86,7 +89,7 @@ namespace Microservices.UI.Services
 
             if (message.Label.ToLowerInvariant() == "restriction".ToLowerInvariant())
             {
-                var url = _configuration.GetValue(typeof(string), "StoreCatalogUri").ToString();
+                var url = _configurationService.GetConfigValue(typeof(string), "StoreCatalogUri").ToString();
                 Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri);
                 _requisicaoService.GetAsync(uri, "products");
             }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microservices.UI.Contracts;
-using Microsoft.AspNetCore.Http;
+﻿using Microservices.UI.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microservices.UI.Controllers
