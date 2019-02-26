@@ -77,7 +77,6 @@ namespace Microservices.UI.Services
             {
                 var storeCatalogs = JsonConvert.DeserializeObject<List<StoreCatalogReadyMessage>>(messageString);
                 _uiCommandService.AddToMessageList("ShowWelcomePage", storeCatalogs);
-                _uiCommandService.SendMessagesAsync();
             }
 
             if (message.Label.ToLowerInvariant() == "noRestriction".ToLowerInvariant())
@@ -92,6 +91,7 @@ namespace Microservices.UI.Services
                 _requisicaoService.GetAsync(uri, "products");
             }
 
+            _uiCommandService.SendMessagesAsync();
             return Task.CompletedTask;
         }
 
