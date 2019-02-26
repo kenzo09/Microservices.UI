@@ -34,24 +34,9 @@ namespace Microservices.UI
                 c.SwaggerDoc("v1",
                     new Info
                     {
-                        Title = "Conversor de Temperaturas",
-                        Version = "v1",
-                        Description = "Exemplo de API REST criada com o ASP.NET Core",
-                        Contact = new Contact
-                        {
-                            Name = "13net",
-                            Url = "https://github.com/kenzo09/Microservices.UI"
-                        }
+                        Title = "UI da GeekBurger",
+                        Version = "v1"
                     });
-
-                string caminhoAplicacao =
-                    PlatformServices.Default.Application.ApplicationBasePath;
-                string nomeAplicacao =
-                    PlatformServices.Default.Application.ApplicationName;
-                string caminhoXmlDoc =
-                    Path.Combine(caminhoAplicacao, $"{nomeAplicacao}.xml");
-
-                c.IncludeXmlComments(caminhoXmlDoc);
             });
 
             services.AddSingleton<IReceiveMessagesFactory, ReceiveMessagesFactory>();

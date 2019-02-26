@@ -11,6 +11,7 @@ namespace Microservices.UI.Moc.Controllers
     [Produces("application/json")]    
     public class StoreMocController : Controller
     {
+        [HttpGet]
         [Route("api/StoreMoc")]
         public IActionResult Index(StoreToGetMoc storeToGetMoc )
         {

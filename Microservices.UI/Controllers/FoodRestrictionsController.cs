@@ -22,6 +22,7 @@ namespace Microservices.UI.Controllers
             _requisicaoService = requisicao;
         }
 
+        [HttpPost]
         [Route("api/FoodRestrictions")]
         public IActionResult Index(FoodRestrictions foodRestrictions)
         {
