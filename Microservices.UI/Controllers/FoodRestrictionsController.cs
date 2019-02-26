@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microservices.UI.Contracts;
-using Microservices.UI.Moc.Contratos;
-using Microservices.UI.Services;
+﻿using Microservices.UI.Contracts;
 using Microservices.UI.Services.Interfaces;
-using Microsoft.ApplicationInsights.AspNetCore.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Microservices.UI.Controllers
 {
@@ -16,9 +9,11 @@ namespace Microservices.UI.Controllers
     public class FoodRestrictionsController : Controller
     {
         private readonly IRequisicaoService _requisicaoService;
+        private readonly IConfigurationService _configurationService;
 
-        public FoodRestrictionsController(IRequisicaoService requisicao)
+        public FoodRestrictionsController(IRequisicaoService requisicao, IConfigurationService configurationService)
         {
+            _configurationService = configurationService;
             _requisicaoService = requisicao;
         }
 
@@ -26,8 +21,12 @@ namespace Microservices.UI.Controllers
         [Route("api/FoodRestrictions")]
         public IActionResult Index(FoodRestrictions foodRestrictions)
         {
+            var url = _configurationService.GetConfigValue(typeof(string), "UsersUri").ToString();
+            Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri);
+            bool usarMoc = Convert.ToBoolean(_configurationService.GetConfigValue(typeof(bool), "UsarMoc"));
 
-            var response = _requisicaoService.PostAsync(foodRestrictions, Request.GetUri(), "Users/foodRestricionsMoc");
+            string api = usarMoc ? "Users/foodRestricionsMoc" : "Users/foodRestricions";
+            var response = _requisicaoService.PostAsync(foodRestrictions, uri, api);
 
             return Ok();
         }

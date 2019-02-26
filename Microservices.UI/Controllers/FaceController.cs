@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Microservices.UI.Contracts;
+﻿using Microservices.UI.Contracts;
 using Microservices.UI.Moc.Contratos;
-using Microservices.UI.Services;
 using Microservices.UI.Services.Interfaces;
-using Microsoft.ApplicationInsights.AspNetCore.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -30,6 +20,7 @@ namespace Microservices.UI.Controllers
         public FaceController(IRequisicaoService requisicao, ILogger<FaceController> logger,
             IReadOnlyPolicyRegistry<string> policyRegistry)
         {
+            _configurationService = configurationService;
             _requisicaoService = requisicao;
             _policyRegistry = policyRegistry;
             _logger = logger;
