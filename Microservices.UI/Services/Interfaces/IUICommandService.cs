@@ -10,6 +10,7 @@ namespace Microservices.UI.Services.Interfaces
     {
         void SendMessagesAsync();
         void AddToMessageList(string label, IEnumerable<StoreCatalogReadyMessage> storeCatalogs);
+        void AddToMessageList(string label, IEnumerable<ProductByStoreToGet> products);
         void AddToMessageList(string label);
     }
 }

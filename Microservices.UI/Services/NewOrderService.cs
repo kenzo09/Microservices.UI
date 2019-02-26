@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using GeekBurger.StoreCatalog.Contract;
+﻿using Microservices.UI.Contracts;
 using Microservices.UI.Services.Extensions;
 using Microservices.UI.Services.Interfaces;
 using Microsoft.Azure.Management.ServiceBus.Fluent;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Microservices.UI.Services
 {
-    public class UICommandService : IUICommandService
+    public class NewOrderService : INewOrderService
     {
-        private const string Topic = "UICommand";
+        private const string Topic = "NewOrder";
         private IConfiguration _configuration;
         private List<Message> _messages;
         private Task _lastTask;
         private IServiceBusNamespace _namespace;
 
-        public UICommandService(IConfiguration configuration)
+        public NewOrderService(IConfiguration configuration)
         {
             _configuration = configuration;
             _messages = new List<Message>();
@@ -37,58 +37,19 @@ namespace Microservices.UI.Services
                     .Equals(Topic, StringComparison.InvariantCultureIgnoreCase)))
                 _namespace.Topics.Define(Topic)
                     .WithSizeInMB(1024).Create();
-
         }
 
-        public void AddToMessageList(string label, IEnumerable<StoreCatalogReadyMessage> storeCatalogs)
+        public void AddToMessageList(string label, OrderResponse order)
         {
-            _messages.AddRange(storeCatalogs.Select(StoreCatalogRedyToMessage(label)).ToList());
-        }
+            var orderSerialized = JsonConvert.SerializeObject(order);
+            var orderByteArray = Encoding.UTF8.GetBytes(orderSerialized);
 
-        public void AddToMessageList(string label, IEnumerable<ProductByStoreToGet> products)
-        {
-            _messages.AddRange(products.Select(ProductsByStoreToMessage(label)).ToList());
-        }
-
-        public void AddToMessageList(string label)
-        {
             _messages.Add(new Message
             {
+                Body = orderByteArray,
                 MessageId = Guid.NewGuid().ToString(),
                 Label = label
             });
-        }
-
-        private static Func<StoreCatalogReadyMessage, Message> StoreCatalogRedyToMessage(string label)
-        {
-            return storeCatalog =>
-            {
-                var storeCatalogSerialized = JsonConvert.SerializeObject(storeCatalog);
-                var storeCatalogByteArray = Encoding.UTF8.GetBytes(storeCatalogSerialized);
-
-                return new Message
-                {
-                    Body = storeCatalogByteArray,
-                    MessageId = Guid.NewGuid().ToString(),
-                    Label = label
-                };
-            };
-        }
-
-        private static Func<ProductByStoreToGet, Message> ProductsByStoreToMessage(string label)
-        {
-            return products =>
-            {
-                var productsSerialized = JsonConvert.SerializeObject(products);
-                var productsByteArray = Encoding.UTF8.GetBytes(productsSerialized);
-
-                return new Message
-                {
-                    Body = productsByteArray,
-                    MessageId = Guid.NewGuid().ToString(),
-                    Label = label
-                };
-            };
         }
 
         public async void SendMessagesAsync()
