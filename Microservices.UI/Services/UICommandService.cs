@@ -42,7 +42,12 @@ namespace Microservices.UI.Services
 
         public void AddToMessageList(string label, IEnumerable<StoreCatalogReadyMessage> storeCatalogs)
         {
-            _messages.AddRange(storeCatalogs.Select(GetMessages(label)).ToList());
+            _messages.AddRange(storeCatalogs.Select(StoreCatalogRedyToMessage(label)).ToList());
+        }
+
+        public void AddToMessageList(string label, IEnumerable<ProductByStoreToGet> products)
+        {
+            _messages.AddRange(products.Select(ProductsByStoreToMessage(label)).ToList());
         }
 
         public void AddToMessageList(string label)
@@ -54,7 +59,7 @@ namespace Microservices.UI.Services
             });
         }
 
-        private static Func<StoreCatalogReadyMessage, Message> GetMessages(string label)
+        private static Func<StoreCatalogReadyMessage, Message> StoreCatalogRedyToMessage(string label)
         {
             return storeCatalog =>
             {
@@ -64,6 +69,22 @@ namespace Microservices.UI.Services
                 return new Message
                 {
                     Body = storeCatalogByteArray,
+                    MessageId = Guid.NewGuid().ToString(),
+                    Label = label
+                };
+            };
+        }
+
+        private static Func<ProductByStoreToGet, Message> ProductsByStoreToMessage(string label)
+        {
+            return products =>
+            {
+                var productsSerialized = JsonConvert.SerializeObject(products);
+                var productsByteArray = Encoding.UTF8.GetBytes(productsSerialized);
+
+                return new Message
+                {
+                    Body = productsByteArray,
                     MessageId = Guid.NewGuid().ToString(),
                     Label = label
                 };

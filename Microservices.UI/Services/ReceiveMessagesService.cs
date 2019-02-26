@@ -1,5 +1,4 @@
 ﻿using GeekBurger.StoreCatalog.Contract;
-using Microservices.UI.Moc.Contratos;
 using Microservices.UI.Services.Interfaces;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -88,7 +88,13 @@ namespace Microservices.UI.Services
             {
                 var url = _configuration.GetValue(typeof(string), "StoreCatalogUri").ToString();
                 Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri);
-                _requisicaoService.GetAsync(uri, "products");
+                var response = _requisicaoService.GetAsync(uri, "products").Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var products = response.Content.ReadAsAsync<List<ProductByStoreToGet>>().Result;
+                    _uiCommandService.AddToMessageList("ShowProductsList", products);
+                }
             }
 
             _uiCommandService.SendMessagesAsync();
