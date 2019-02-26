@@ -1,4 +1,5 @@
 ﻿using GeekBurger.StoreCatalog.Contract;
+using Microservices.UI.Moc.Contratos;
 using Microservices.UI.Services.Interfaces;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
@@ -19,20 +20,22 @@ namespace Microservices.UI.Services
         private static ServiceBusConfiguration _serviceBusConfiguration;
         private readonly string _subscriptionName;
         private readonly IUICommandService _uiCommandService;
+        private readonly IRequisicaoService _requisicaoService;
+        private readonly IConfiguration _configuration;
 
-        public ReceiveMessagesService(IUICommandService uiCommandService, string topic, string subscription, string filterName = null, string filter = null)
+        public ReceiveMessagesService(IUICommandService uiCommandService, IRequisicaoService requisicaoService,
+            string topic, string subscription, string filterName = null, string filter = null)
         {
-            IConfiguration configuration = new ConfigurationBuilder()
+            _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            _serviceBusConfiguration = configuration.GetSection("serviceBus").Get<ServiceBusConfiguration>();
+            _serviceBusConfiguration = _configuration.GetSection("serviceBus").Get<ServiceBusConfiguration>();
             _uiCommandService = uiCommandService;
-
+            _requisicaoService = requisicaoService;
             _topicName = topic;
             _subscriptionName = subscription;
-
             ReceiveMessages(filterName, filter);
         }
 
@@ -66,17 +69,29 @@ namespace Microservices.UI.Services
             if (message.Body != null)
                 messageString = Encoding.UTF8.GetString(message.Body);
 
-            List<StoreCatalogReadyMessage> storeCatalog = null;
-
-            if (message.Label.ToLowerInvariant() == nameof(StoreCatalogReadyMessage).ToLowerInvariant())
-                storeCatalog = JsonConvert.DeserializeObject<List<StoreCatalogReadyMessage>>(messageString);
-
             Console.WriteLine("Message Received");
             Console.WriteLine($"message Label: {message.Label}");
             Console.WriteLine($"message CorrelationId: {message.CorrelationId}");
 
-            _uiCommandService.AddToMessageList(storeCatalog);
+            if (message.Label.ToLowerInvariant() == nameof(StoreCatalogReadyMessage).ToLowerInvariant())
+            {
+                var storeCatalogs = JsonConvert.DeserializeObject<List<StoreCatalogReadyMessage>>(messageString);
+                _uiCommandService.AddToMessageList("ShowWelcomePage", storeCatalogs);
+            }
 
+            if (message.Label.ToLowerInvariant() == "noRestriction".ToLowerInvariant())
+            {
+                _uiCommandService.AddToMessageList("ShowFoodRestrictionsForm");
+            }
+
+            if (message.Label.ToLowerInvariant() == "restriction".ToLowerInvariant())
+            {
+                var url = _configuration.GetValue(typeof(string), "StoreCatalogUri").ToString();
+                Uri.TryCreate(url, UriKind.RelativeOrAbsolute, out Uri uri);
+                _requisicaoService.GetAsync(uri, "products");
+            }
+
+            _uiCommandService.SendMessagesAsync();
             return Task.CompletedTask;
         }
 

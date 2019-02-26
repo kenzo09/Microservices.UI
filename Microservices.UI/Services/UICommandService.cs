@@ -17,7 +17,6 @@ namespace Microservices.UI.Services
     public class UICommandService : IUICommandService
     {
         private const string Topic = "UICommand";
-        private const string Label = "ShowWelcomePage";
         private IConfiguration _configuration;
         private List<Message> _messages;
         private Task _lastTask;
@@ -41,21 +40,33 @@ namespace Microservices.UI.Services
 
         }
 
-        public void AddToMessageList(IEnumerable<StoreCatalogReadyMessage> storeCatalogs)
+        public void AddToMessageList(string label, IEnumerable<StoreCatalogReadyMessage> storeCatalogs)
         {
-            _messages.AddRange(storeCatalogs.Select(GetMessage).ToList());
+            _messages.AddRange(storeCatalogs.Select(GetMessages(label)).ToList());
         }
 
-        public Message GetMessage(StoreCatalogReadyMessage storeCatalog)
+        public void AddToMessageList(string label)
         {
-            var storeCatalogSerialized = JsonConvert.SerializeObject(storeCatalog);
-            var storeCatalogByteArray = Encoding.UTF8.GetBytes(storeCatalogSerialized);
-
-            return new Message
+            _messages.Add(new Message
             {
-                Body = storeCatalogByteArray,
                 MessageId = Guid.NewGuid().ToString(),
-                Label = Label
+                Label = label
+            });
+        }
+
+        private static Func<StoreCatalogReadyMessage, Message> GetMessages(string label)
+        {
+            return storeCatalog =>
+            {
+                var storeCatalogSerialized = JsonConvert.SerializeObject(storeCatalog);
+                var storeCatalogByteArray = Encoding.UTF8.GetBytes(storeCatalogSerialized);
+
+                return new Message
+                {
+                    Body = storeCatalogByteArray,
+                    MessageId = Guid.NewGuid().ToString(),
+                    Label = label
+                };
             };
         }
 

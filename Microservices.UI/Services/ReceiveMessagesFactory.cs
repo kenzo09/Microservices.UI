@@ -31,7 +31,7 @@ namespace Microservices.UI.Services
 
         public ReceiveMessagesService CreateNew(string topic, string subscription, string filterName = null, string filter = null)
         {
-            return new ReceiveMessagesService(_uiCommandService, topic, subscription, filterName, filter);
+            return new ReceiveMessagesService(_uiCommandService, _requisicaoService, topic, subscription, filterName, filter);
         }
     }
 }
