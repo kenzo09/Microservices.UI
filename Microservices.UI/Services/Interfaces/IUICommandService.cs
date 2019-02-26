@@ -9,6 +9,7 @@ namespace Microservices.UI.Services.Interfaces
     public interface IUICommandService
     {
         void SendMessagesAsync();
-        void AddToMessageList(IEnumerable<StoreCatalogReadyMessage> storeCatalogs);
+        void AddToMessageList(string label, IEnumerable<StoreCatalogReadyMessage> storeCatalogs);
+        void AddToMessageList(string label);
     }
 }
