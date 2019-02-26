@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microservices.UI.Controllers;
 using Microservices.UI.Services;
 using Microservices.UI.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -42,6 +43,7 @@ namespace Microservices.UI
             services.AddSingleton<IReceiveMessagesFactory, ReceiveMessagesFactory>();
             services.AddSingleton<IUICommandService, UICommandService>();
             services.AddSingleton<IRequisicaoService, RequisicaoService>();
+            services.AddPollyPolicies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
